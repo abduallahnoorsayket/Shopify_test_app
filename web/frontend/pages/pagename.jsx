@@ -15,6 +15,10 @@ import {
   Link,
   List,
   Listbox,
+  Frame,
+  Loading,
+  ProgressBar,
+  MediaCard,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 
@@ -38,11 +42,40 @@ export default function PageName() {
       />
       <Layout>
         <Layout.Section>
-          <Card sectioned>
-            <Heading>Heading</Heading>
-            <TextContainer>
-              <p>Body</p>
-            </TextContainer>
+          <MediaCard
+            title="Getting Started"
+            primaryAction={{
+              content: "Learn about getting started",
+              onAction: () => {},
+            }}
+            description="Discover how Shopify can power up your entrepreneurial journey."
+            popoverActions={[{ content: "Dismiss", onAction: () => {} }]}
+            size="small"
+          >
+            <img
+              alt=""
+              width="100%"
+              height="100%"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+              src="https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?b=1&s=170667a&w=0&k=20&c=KDO6yy-rASso-b0tI6Euv2um6GxXJ6QoQr0qioETwJE="
+            />
+          </MediaCard>
+          <Card
+            title="Shipment 123456789"
+            secondaryFooterActions={[
+              { content: "Cancel shipment", destructive: true },
+            ]}
+            primaryFooterAction={{ content: "Add tracking number" }}
+          >
+            <Card.Section title="Items">
+              <List>
+                <List.Item>1 × Oasis Glass, 4-Pack</List.Item>
+                <List.Item>1 × Anubis Cup, 2-Pack</List.Item>
+              </List>
+            </Card.Section>
           </Card>
           <Card sectioned>
             <Heading>Heading</Heading>
@@ -115,8 +148,20 @@ export default function PageName() {
         <Layout.Section>
           <Card title="Online store dashboard" sectioned>
             <p>View a summary of your online store’s performance.</p>
+            <br></br>
+            <span>
+              {" "}
+              <div style={{ width: 525 }}>
+                <ProgressBar progress={75} />
+              </div>
+            </span>
           </Card>
         </Layout.Section>
+        <div style={{ height: "100px" }}>
+          <Frame>
+            <Loading />
+          </Frame>
+        </div>
       </Layout>
     </Page>
   );

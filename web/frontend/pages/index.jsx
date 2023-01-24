@@ -19,7 +19,7 @@ export default function HomePage() {
     <Page narrowWidth>
       <TitleBar title="Test App Abdullah" primaryAction={null} />
       <Layout>
-        <Layout.Section>
+        {/* <Layout.Section>
           <Card sectioned>
             <Stack
               wrap={false}
@@ -78,7 +78,7 @@ export default function HomePage() {
               </Stack.Item>
             </Stack>
           </Card>
-        </Layout.Section>
+        </Layout.Section> */}
         <Layout.Section>
           <ProductsCard />
         </Layout.Section>
