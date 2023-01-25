@@ -1,77 +1,58 @@
-import { Card, Page, Layout, TextContainer, Heading } from "@shopify/polaris";
-import { TitleBar } from "@shopify/app-bridge-react";
-import {
-  AccountConnection,
-  Button,
-  Popover,
-  ActionList,
-  ButtonGroup,
-  Badge,
-  Banner,
-  Avatar,
-} from "@shopify/polaris";
+import { Page, Badge, Card, PageActions } from "@shopify/polaris";
+import React from "react";
 
-// import Badge from "../components/CustomComp/BadgeComp";
-
-export default function NewpageTwo() {
+export default function PageExample() {
   return (
-    <Page>
-      <TitleBar
-        title="New page  name"
+    <Page
+      breadcrumbs={[{ content: "Products", url: "/pagename" }]}
+      title="3/4 inch Leather pet collar"
+      titleMetadata={<Badge status="success">Paid</Badge>}
+      subtitle="Perfect for any pet"
+      compactTitle
+      primaryAction={{ content: "Save", disabled: false }}
+      secondaryActions={[
+        {
+          content: "Duplicate",
+          accessibilityLabel: "Secondary action label",
+          onAction: () => alert("Duplicate action"),
+        },
+        {
+          content: "View on your store",
+          onAction: () => alert("View on your store action"),
+        },
+      ]}
+      actionGroups={[
+        {
+          title: "Promote",
+          accessibilityLabel: "Action group label",
+          actions: [
+            {
+              content: "Share on Facebook",
+              accessibilityLabel: "Individual action label",
+              onAction: () => alert("Share on Facebook action"),
+            },
+          ],
+        },
+      ]}
+      pagination={{
+        hasPrevious: true,
+        hasNext: true,
+      }}
+    >
+      <Card title="Credit card" sectioned>
+        <p>Credit card information</p>
+      </Card>
+      <PageActions
         primaryAction={{
-          content: "Primary action",
-          onAction: () => console.log("Primary action"),
+          content: "Save",
         }}
         secondaryActions={[
           {
-            content: "Secondary action",
-            onAction: () => console.log("Secondary action"),
+            content: "Delete",
+            destructive: true,
           },
         ]}
       />
-      <Layout>
-        <Layout.Section>
-          <Card sectioned>
-            <Heading>Heading</Heading>
-            <TextContainer>
-              <p>Body</p>
-            </TextContainer>
-          </Card>
-          <Card sectioned>
-            <Heading>Heading</Heading>
-            <TextContainer>
-              <p>Body</p>
-              <Badge status="success">Fulfilled</Badge>
-            </TextContainer>
-            <br></br>
-            <Banner title="Order archived" onDismiss={() => {}}>
-              <p>This order was archived on March 7, 2017 at 3:12pm EDT.</p>
-            </Banner>
-            <br />
-            <Avatar customer name="Farrah" />
-            <ButtonGroup segmented>
-              <Button>Bold</Button>
-              <Button>Italic</Button>
-              <Button>Underline</Button>
-            </ButtonGroup>
-          </Card>
-        </Layout.Section>
-        <Layout.Section secondary>
-          <Card sectioned>
-            <Heading>Heading</Heading>
-            <TextContainer>
-              <p>Body</p>
-              <Button>Add product </Button>
-            </TextContainer>
-
-            <br></br>
-            <ButtonGroup>
-              <Button>Cancel</Button>
-              <Button primary>Save</Button>
-            </ButtonGroup>
-          </Card>
-        </Layout.Section>
-      </Layout>
     </Page>
   );
 }

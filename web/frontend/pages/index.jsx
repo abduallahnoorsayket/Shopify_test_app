@@ -7,14 +7,21 @@ import {
   Stack,
   Link,
   Heading,
+  Button,
+  Modal,
+  OptionList,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
-
 import { trophyImage } from "../assets";
-
 import { ProductsCard } from "../components";
+import { useState, useCallback } from "react";
 
 export default function HomePage() {
+  const [active, setActive] = useState(true);
+  const [selected, setSelected] = useState([]);
+  const handleChange = useCallback(() => setActive(!active), [active]);
+
+  const activator = <Button onClick={handleChange}> Open Modal</Button>;
   return (
     <Page narrowWidth>
       <TitleBar title="Test App Abdullah" primaryAction={null} />
@@ -81,8 +88,40 @@ export default function HomePage() {
         </Layout.Section> */}
         <Layout.Section>
           <ProductsCard />
+          <div style={{ height: "500px" }}>
+            <Modal
+              activator={activator}
+              open={active}
+              onClose={handleChange}
+              title="Reach more shoppers with Instagram product tags"
+              primaryAction={{
+                content: "Add Instagram",
+                onAction: handleChange,
+              }}
+              secondaryActions={[
+                {
+                  content: "Learn more",
+                  onAction: handleChange,
+                },
+              ]}
+            >
+              <Modal.Section>
+                <TextContainer>
+                  <p>
+                    Use Instagram posts to share your products with millions of
+                    people. Let shoppers buy from your store without leaving
+                    Instagram.
+                  </p>
+                </TextContainer>
+              </Modal.Section>
+            </Modal>
+            <br>
+            </br>
+          </div>
         </Layout.Section>
       </Layout>
     </Page>
+    // new page
+    
   );
 }
