@@ -28,6 +28,10 @@ export default function App() {
                   label: "Page 3",
                   destination: "/NewpageTwo",
                 },
+                {
+                  label: "Page 4",
+                  destination: "/NewpageThree",
+                },
               ]}
             />
             <Routes pages={pages} />
