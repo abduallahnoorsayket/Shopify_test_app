@@ -14,6 +14,10 @@ import {
   Scrollable,
   Select,
   SettingToggle,
+  Thumbnail,
+  Toast,
+  Frame,
+  Tooltip,
   // Text,
 } from "@shopify/polaris";
 import React from "react";
@@ -31,12 +35,21 @@ export default function NewpageThree() {
     { label: "Last 7 days", value: "lastWeek" },
   ];
   // tog
+  // const [active, setActive] = useState(false);
+
+  // const handleToggle = useCallback(() => setActive((active) => !active), []);
+
+  // const contentStatus = active ? "Deactivate" : "Activate";
+  // const textStatus = active ? "activated" : "deactivated";
+
+  // Toast
   const [active, setActive] = useState(false);
 
-  const handleToggle = useCallback(() => setActive((active) => !active), []);
+  const toggleActive = useCallback(() => setActive((active) => !active), []);
 
-  const contentStatus = active ? "Deactivate" : "Activate";
-  const textStatus = active ? "activated" : "deactivated";
+  const toastMarkup = active ? (
+    <Toast content="Message sent" onDismiss={toggleActive} />
+  ) : null;
 
   return (
     <>
@@ -79,7 +92,7 @@ export default function NewpageThree() {
           </div>
           <br></br>
           <Card>
-            <SettingToggle
+            {/* <SettingToggle
               action={{
                 content: contentStatus,
                 onAction: handleToggle,
@@ -91,7 +104,25 @@ export default function NewpageThree() {
                 {textStatus}
               </span>
               .
-            </SettingToggle>
+              <Thumbnail
+                source="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+                alt="Black choker necklace"
+              />
+            </SettingToggle> */}
+          </Card>
+          <Tooltip active content="This order has shipping labels.">
+            <TextField variant="bodyMd" fontWeight="bold" as="span">
+              Order #1001
+            </TextField>
+          </Tooltip>
+          <br></br>
+          <Card>
+            <Frame style={{ height: "150px" }}>
+              <Page title="Toast example">
+                <Button onClick={toggleActive}>Show Toast</Button>
+                {toastMarkup}
+              </Page>
+            </Frame>
           </Card>
         </div>
       </Page>
