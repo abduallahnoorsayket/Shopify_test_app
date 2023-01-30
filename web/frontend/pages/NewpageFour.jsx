@@ -96,18 +96,34 @@ export default function NewpageThree() {
       </div>
       <Page>
         <Grid>
-          <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 3 }}>
+          <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
             <Card title="Sales" sectioned>
-              <Icon source={CirclePlusMinor} color="warning" />;
-              <p>View a summary of your online store’s sales.</p>
+              <Grid>
+                <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
+                  <TextField
+                    type="number"
+                    label="Minimum order"
+                    onChange={() => {}}
+                    autoComplete="off"
+                  />
+                </Grid.Cell>
+                <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
+                  <TextField
+                    type="number"
+                    label="Minimum order"
+                    onChange={() => {}}
+                    autoComplete="off"
+                  />
+                </Grid.Cell>
+              </Grid>
             </Card>
           </Grid.Cell>
-          <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 3 }}>
+          <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
             <Card title="Orders" sectioned>
               <p>View a summary of your online store’s orders.</p>
             </Card>
           </Grid.Cell>{" "}
-          <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 3 }}>
+          {/* <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 3 }}>
             <Card title="Sales" sectioned>
               <p>View a summary of your online store’s sales.</p>
             </Card>
@@ -116,7 +132,7 @@ export default function NewpageThree() {
             <Card title="Sales" sectioned>
               <p>View a summary of your online store’s sales.</p>
             </Card>
-          </Grid.Cell>
+          </Grid.Cell> */}
         </Grid>
         <br></br>
         <Form onSubmit={handleSubmit}>
