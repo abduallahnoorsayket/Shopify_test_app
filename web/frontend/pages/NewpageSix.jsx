@@ -5,6 +5,11 @@ import {
   ExceptionList,
   FooterHelp,
   Link,
+  Tabs,
+  CalloutCard,
+  useIndexResourceState,
+  IndexTable,
+  TextContainer,
   // Text,
 } from "@shopify/polaris";
 import React from "react";
@@ -48,7 +53,83 @@ export default function NewpageThree() {
   //     </Stack>
   //   </div>
   // );
+  // tabs
+  const [selected, setSelected] = useState(0);
 
+  const handleTabChange = useCallback(
+    (selectedTabIndex) => setSelected(selectedTabIndex),
+    []
+  );
+
+  const tabs = [
+    {
+      id: "all-customers-1",
+      content: "All",
+      accessibilityLabel: "All customers",
+      panelID: "all-customers-content-1",
+    },
+    {
+      id: "accepts-marketing-1",
+      content: "Accepts marketing",
+      panelID: "accepts-marketing-content-1",
+    },
+    {
+      id: "repeat-customers-1",
+      content: "Repeat customers",
+      panelID: "repeat-customers-content-1",
+    },
+    {
+      id: "prospects-1",
+      content: "Prospects",
+      panelID: "prospects-content-1",
+    },
+  ];
+  // Index table
+  const customers = [
+    {
+      id: "3411",
+      url: "customers/341",
+      name: "Mae Jemison",
+      location: "Decatur, USA",
+      orders: 20,
+      amountSpent: "$2,400",
+    },
+    {
+      id: "2561",
+      url: "customers/256",
+      name: "Ellen Ochoa",
+      location: "Los Angeles, USA",
+      orders: 30,
+      amountSpent: "$140",
+    },
+  ];
+  const resourceName = {
+    singular: "customer",
+    plural: "customers",
+  };
+
+  const { selectedResources, allResourcesSelected, handleSelectionChange } =
+    useIndexResourceState(customers);
+
+  const rowMarkup = customers.map(
+    ({ id, name, location, orders, amountSpent }, index) => (
+      <IndexTable.Row
+        id={id}
+        key={id}
+        selected={selectedResources.includes(id)}
+        position={index}
+      >
+        <IndexTable.Cell>
+          <TextContainer variant="bodyMd" fontWeight="bold" as="span">
+            {name}
+          </TextContainer>
+        </IndexTable.Cell>
+        <IndexTable.Cell>{location}</IndexTable.Cell>
+        <IndexTable.Cell>{orders}</IndexTable.Cell>
+        <IndexTable.Cell>{amountSpent}</IndexTable.Cell>
+      </IndexTable.Row>
+    )
+  );
   return (
     <>
       <Page>
@@ -56,6 +137,51 @@ export default function NewpageThree() {
           {uploadedFiles}
           {fileUpload}
         </DropZone> */}
+        <br></br>
+        <CalloutCard
+          title="Customize the style of your checkout"
+          illustration="https://cdn.shopify.com/s/assets/admin/checkout/settings-customizecart-705f57c725ac05be5a34ec20c05b94298cb8afd10aac7bd9c7ad02030f48cfa0.svg"
+          primaryAction={{
+            content: "Customize checkout",
+            url: "https://www.shopify.com",
+          }}
+        >
+          <p>Upload your store’s logo, change colors and fonts, and more.</p>
+        </CalloutCard>
+        <br></br>
+        <Card>
+          <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
+            <Card.Section title={tabs[selected].content}>
+              <p>
+                Tab {selected} selected. Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and scrambled it to make a
+                type specimen book. It has survived not only five centuries
+              </p>
+            </Card.Section>
+          </Tabs>
+        </Card>
+        <br></br>
+        <Card>
+          <IndexTable
+            resourceName={resourceName}
+            itemCount={customers.length}
+            selectedItemsCount={
+              allResourcesSelected ? "All" : selectedResources.length
+            }
+            onSelectionChange={handleSelectionChange}
+            headings={[
+              { title: "Name" },
+              { title: "Location" },
+              { title: "Order count" },
+              { title: "Amount spent" },
+            ]}
+          >
+            {rowMarkup}
+          </IndexTable>
+        </Card>
+        <br></br>
         <Card sectioned>
           <EmptyState
             heading="Upload a file to get started"
